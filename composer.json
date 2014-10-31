@@ -1,5 +1,5 @@
 {
-    "name": "novo-projeto",
+    "name": "gjunior-tray/cakephp-composer-skel",
     "require": {
         "cakephp/cakephp": "2.5.*"        
     },
