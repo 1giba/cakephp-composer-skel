@@ -1,0 +1,8 @@
+/app/tmp/
+!/app/tmp/cache/models/.gitkeep
+!/app/tmp/cache/persistent/.gitkeep
+!/app/tmp/cache/persistent_legado/.gitkeep
+!/app/tmp/cache/views/.gitkeep
+!/app/tmp/logs/.gitkeep
+!/app/tmp/sessions/.gitkeep
+!/app/tmp/tests/.gitkeep
