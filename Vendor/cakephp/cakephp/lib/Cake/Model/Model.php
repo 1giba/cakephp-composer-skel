@@ -757,7 +757,7 @@ class Model extends Object implements CakeEventListener {
 
 /**
  * Returns a list of all events that will fire in the model during it's lifecycle.
- * You can override this function to add you own listener callbacks
+ * You can override this function to add your own listener callbacks
  *
  * @return array
  */
@@ -1362,7 +1362,7 @@ class Model extends Object implements CakeEventListener {
  * $field => keys(type, null, default, key, length, extra)
  *
  * @param bool|string $field Set to true to reload schema, or a string to return a specific field
- * @return array Array of table metadata
+ * @return array|null Array of table metadata
  */
 	public function schema($field = false) {
 		if ($this->useTable !== false && (!is_array($this->_schema) || $field === true)) {
@@ -1665,7 +1665,7 @@ class Model extends Object implements CakeEventListener {
  *   If a boolean, indicates whether or not to validate before saving.
  *   If an array, allows control of 'validate', 'callbacks' and 'counterCache' options.
  *   See Model::save() for details of each options.
- * @return bool See Model::save()
+ * @return bool|array See Model::save() False on failure or an array of model data on success.
  * @see Model::save()
  * @link http://book.cakephp.org/2.0/en/models/saving-your-data.html#model-savefield-string-fieldname-string-fieldvalue-validate-false
  */
@@ -2904,7 +2904,7 @@ class Model extends Object implements CakeEventListener {
  *
  * @param string $type Type of find operation (all / first / count / neighbors / list / threaded)
  * @param array $query Option fields (conditions / fields / joins / limit / offset / order / page / group / callbacks)
- * @return array Array of records, or Null on failure.
+ * @return array|null Array of records, or Null on failure.
  * @link http://book.cakephp.org/2.0/en/models/retrieving-your-data.html
  */
 	public function find($type = 'first', $query = array()) {
@@ -2963,7 +2963,7 @@ class Model extends Object implements CakeEventListener {
  *
  * @param string $type Type of find operation (all / first / count / neighbors / list / threaded)
  * @param array $query Option fields (conditions / fields / joins / limit / offset / order / page / group / callbacks)
- * @return array Query array or null if it could not be build for some reasons
+ * @return array|null Query array or null if it could not be build for some reasons
  * @see Model::find()
  */
 	public function buildQuery($type = 'first', $query = array()) {
@@ -3293,11 +3293,26 @@ class Model extends Object implements CakeEventListener {
 /**
  * Returns false if any fields passed match any (by default, all if $or = false) of their matching values.
  *
+ * Can be used as a validation method. When used as a validation method, the `$or` parameter
+ * contains an array of fields to be validated.
+ *
  * @param array $fields Field/value pairs to search (if no values specified, they are pulled from $this->data)
- * @param bool $or If false, all fields specified must match in order for a false return value
+ * @param bool|array $or If false, all fields specified must match in order for a false return value
  * @return bool False if any records matching any fields are found
  */
 	public function isUnique($fields, $or = true) {
+		if (is_array($or)) {
+			$isRule = (
+				array_key_exists('rule', $or) &&
+				array_key_exists('required', $or) &&
+				array_key_exists('message', $or)
+			);
+			if (!$isRule) {
+				$args = func_get_args();
+				$fields = $args[1];
+				$or = isset($args[2]) ? $args[2] : true;
+			}
+		}
 		if (!is_array($fields)) {
 			$fields = func_get_args();
 			if (is_bool($fields[count($fields) - 1])) {
@@ -3567,7 +3582,7 @@ class Model extends Object implements CakeEventListener {
  * Gets all the models with which this model is associated.
  *
  * @param string $type Only result associations of this type
- * @return array Associations
+ * @return array|null Associations
  */
 	public function getAssociated($type = null) {
 		if (!$type) {

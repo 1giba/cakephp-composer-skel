@@ -396,7 +396,7 @@ class DboSource extends DataSource {
  *
  * @param string $sql SQL statement
  * @param array $params Additional options for the query.
- * @return bool
+ * @return mixed Resource or object representing the result set, or false on failure
  */
 	public function rawQuery($sql, $params = array()) {
 		$this->took = $this->numRows = false;
@@ -1410,11 +1410,10 @@ class DboSource extends DataSource {
 	protected function _fetchHasMany(Model $Model, $query, $ids) {
 		$ids = array_unique($ids);
 
-		$query = str_replace('{$__cakeID__$}', implode(', ', $ids), $query);
 		if (count($ids) > 1) {
-			$query = str_replace('= (', 'IN (', $query);
+			$query = str_replace('= ({$__cakeID__$}', 'IN ({$__cakeID__$}', $query);
 		}
-
+		$query = str_replace('{$__cakeID__$}', implode(', ', $ids), $query);
 		return $this->fetchAll($query, $Model->cacheQueries);
 	}
 

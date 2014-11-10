@@ -611,7 +611,7 @@ class Controller extends Object implements CakeEventListener {
 
 /**
  * Returns a list of all events that will fire in the controller during its lifecycle.
- * You can override this function to add you own listener callbacks
+ * You can override this function to add your own listener callbacks
  *
  * @return array
  */
@@ -1017,7 +1017,7 @@ class Controller extends Object implements CakeEventListener {
  * @param string $bool SQL boolean operator: AND, OR, XOR, etc.
  * @param bool $exclusive If true, and $op is an array, fields not included in $op will not be
  *        included in the returned conditions
- * @return array An array of model conditions
+ * @return array|null An array of model conditions
  * @deprecated 3.0.0 Will be removed in 3.0.
  */
 	public function postConditions($data = array(), $op = null, $bool = 'AND', $exclusive = false) {
