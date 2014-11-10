@@ -21,9 +21,3 @@ Ou faça o download do arquivo [zip](https://github.com/gjunior-tray/cakephp-com
 
 * Renomeie o arquivo app/Config/database.php.default para app/Config/database.php
 
-## Atualizar versão 
-
-* Para atualizar a versão do CakePHP ou a versão do Debugkit, dentro de /caminho/do/seu/projeto/
-```sh
-$ composer update
-```
