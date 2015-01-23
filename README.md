@@ -17,6 +17,11 @@ $ git clone git@github.com:gjunior-tray/cakephp-composer-skel.git /caminho/do/se
 
 Ou faça o download do arquivo [zip](https://github.com/gjunior-tray/cakephp-composer-skel/archive/master.zip) e descompacte dentro de /caminho/do/seu/projeto/
 
+Depois dentro da pasta do projeto, instale as dependências via composer:
+```sh
+$ composer update
+```
+
 ## Configuração
 
 * Renomeie o arquivo app/Config/database.php.default para app/Config/database.php
