@@ -6,3 +6,5 @@
 !/app/tmp/logs/.gitkeep
 !/app/tmp/sessions/.gitkeep
 !/app/tmp/tests/.gitkeep
+/Vendor/
+composer.lock
