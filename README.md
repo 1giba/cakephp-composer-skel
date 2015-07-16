@@ -19,7 +19,7 @@ Ou faça o download do arquivo [zip](https://github.com/gjunior-tray/cakephp-com
 
 Depois dentro da pasta do projeto, instale as dependências via composer:
 ```sh
-$ composer update
+$ composer install
 ```
 
 ## Configuração
