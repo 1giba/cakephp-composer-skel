@@ -1,10 +1,10 @@
 {
     "name": "gjunior-tray/cakephp-composer-skel",
     "require": {
-        "cakephp/cakephp": "2.5.*"        
+        "cakephp/cakephp": "2.9.*"
     },
     "require-dev": {
-        "cakephp/debug_kit": "2.2.*"        
+        "cakephp/debug_kit": "2.2.*"
     },
     "config": {
         "vendor-dir": "Vendor/"
